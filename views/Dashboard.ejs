@@ -1,0 +1,30 @@
+<div class="row">
+    <div>
+
+
+    <p>Welcome <%= user[0].name %></p>
+    <a href="/products">SEE ALL PRODUCTS</a>
+
+   
+   
+    
+</div>
+
+<div class="mt-5 col-md-9">
+    ADD Product
+    <form action="/products/add" method="POST" class="form bg-info">
+        <%- include ('partials/messages') -%>
+        Title:
+        <input type="text" name="Title" placeholder="Title" class="form-input"><br>
+        Description:
+        <input type="text" name="Desc" placeholder="Description" class="form-input"><br>
+        Price:
+        <input type="text" placeholder="Price" name="Price" class="form-input"><br>
+        <input type="hidden" value="<%= user[0].name %>" name="Author">
+        <button type="submit" class="btn btn-success"> ADD</button>
+    </form>
+</div>
+
+
+</div>
+

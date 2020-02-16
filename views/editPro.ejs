@@ -1,0 +1,17 @@
+<div class="row">
+    <div class="mt-5 col-md-9">
+        ADD Product
+        <form action="/products/edit/<%= result[0].id %>" method="POST" class="form bg-info">
+            <%- include ('partials/messages') -%>
+            Title:
+            <input type="text" name="Title" value="<%= result[0].Title %>" placeholder="Title" class="form-input"><br>
+            Description:
+            <input type="text" name="Desc" value="<%= result[0].Description %>" placeholder="Description" class="form-input"><br>
+            Price:
+            <input type="text" value="<%= result[0].Price %>" placeholder="Price" name="Price" class="form-input"><br>
+            
+            <button type="submit" class="btn btn-success"> UPDATE</button>
+        </form>
+    </div>  
+    
+</div>

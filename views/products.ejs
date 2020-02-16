@@ -1,0 +1,21 @@
+<div class="row"></div>
+<% result.forEach((item)=>{ %>
+    
+    <div class="products col-md-4 m-5 ">
+        <%- include ('partials/messages') -%>
+        <ul class="list-group" style="background-color: blueviolet; list-style: none;">
+            
+                <li class="list-item"><b>Author:</b> <%= item.Author %> </li>
+                <li class="list-item"> <b>Item:</b><%= item.Title %></li>
+                <li class="list-item"><b>Brand:</b><%= item.Description %></li>
+                <li class="list-item"><b>Price:</b> <%= item.Price %> </li>
+                <% if(item.Author == user[0].name){ %>
+                    <li> <a href="/products/edit/<%= item.id %>" class="btn btn-success">EDIT</a>
+                         <button class="btn btn-danger" id="delete" data-id="<%= item.id %> ">DELETE</button class="btn btn-danger"> </li>
+                    <% } %>
+           
+        </ul>
+    </div>
+
+<% }) %>
+</div>

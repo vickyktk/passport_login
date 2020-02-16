@@ -1,0 +1,19 @@
+
+<div class="row">
+    <div class="col-md-4 mx-auto mt-5 bg-info">
+        
+     <%- include ('partials/messages') -%>
+     <h3>Login Here</h3>
+        <form class="form inline-form" action="Login" method="POST">
+            <label for="Email">Email</label>
+            <input type="email" name="Email" class="form-control" required>
+            <label for="Password">Password</label>
+            <input type="password" name="password" class="form-control" required><br>
+            <input class="btn btn-success" name="submit" type="submit" value="Login">
+            OR  <a href="/Register" class="bg-light btn">Register</a>
+        </form>
+    </div>
+
+</div>
+
+

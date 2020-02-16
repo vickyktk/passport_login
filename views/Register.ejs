@@ -1,0 +1,38 @@
+    
+<div class="conatiner mt-5" style="color:whitesmoke;">
+        <div class="row">
+            <div class="col-md-3 ml-auto mr-auto bg-dark ">
+                <%- include ('partials/messages') -%>
+                <h3>Register Yourself</h3>
+    <form action="/Register" method="POST" class="form">
+        <div class="form-group">
+            <label for="Name">Name</label>
+        <input type="text" class="form-control" name="Name" placeholder="Your Name goes here"
+        value="<%= typeof Name != 'undefined' ? Name :'' %>" required><br>
+        
+        </div>
+        <label for="Email">Email</label>
+        <input type="text" class="form-control" name="Email"
+        value="<%= typeof Email != 'undefined' ? Email :'' %>" placeholder="Your Email goes here" required><br>
+        <label for="select">Country</label>
+        <select name="select" class="form-control">
+            <option>Pakistan</option>
+            <option>Australia</option>
+            <option>Africa</option>
+
+        </select><br>
+        <label for="form-control">Password</label>
+        <input type="password" name="Password" class="form-group" placeholder="Your password goes here" required><br>
+        <input type="submit" value="Register" class="form-group btn btn-success" /><br>
+        Already have an account ?<a href="Login">Login</a>
+
+
+    </form>
+
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>
