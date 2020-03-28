@@ -89,7 +89,7 @@ function notLoggedIn(req,res,next){
 }
 
 app.get('/',(req,res)=>{
-    res.render('home')
+    res.render('Home')
 })
 
 app.get('/Register',notLoggedIn,(req,res)=>{
@@ -125,5 +125,8 @@ app.post('/Register',notLoggedIn,urlEncoded,routes.Register)
 
 app.post('/Login',notLoggedIn,urlEncoded,routes.Login)
 
-const server = app.listen(3000,console.log("Socket.io Hello World server started!"));
-const io = require('socket.io')(server);
+
+
+app.listen(3000,()=>{
+  console.log('Server Running on port 3000')
+})
