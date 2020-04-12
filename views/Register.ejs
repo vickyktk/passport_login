@@ -5,6 +5,10 @@
                 <%- include ('partials/messages') -%>
                 <h3>Register Yourself</h3>
     <form action="/Register" method="POST" class="form">
+        
+        <a class="btn btn-danger" href="/Google">Google</a>
+
+        <a class="btn btn-info" href="/facebook">Facebook</a>
         <div class="form-group">
             <label for="Name">Name</label>
         <input type="text" class="form-control" name="Name" placeholder="Your Name goes here"
@@ -25,6 +29,8 @@
         <input type="password" name="Password" class="form-group" placeholder="Your password goes here" required><br>
         <input type="submit" value="Register" class="form-group btn btn-success" /><br>
         Already have an account ?<a href="Login">Login</a>
+
+
 
 
     </form>

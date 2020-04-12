@@ -1,20 +1,16 @@
 const express = require('express')
 const bodyparser = require('body-parser')
-const router = express.Router();
 const flash=require('express-flash')
 const session=require('express-session')
 const passport = require('passport')
 const expressValidator = require('express-validator')
 const expressLayouts=require('express-ejs-layouts')
 // Passport Config
-require('./config/passport')(passport);
+require('./config/passport');
+require('./config/passport_social');
 
 
 
-
-
-
-var mysql = require('./Model/db')
 const app = express();
 
 
@@ -41,6 +37,7 @@ app.use(expressValidator({
 app.set('view engine','ejs')
 
 app.use('/style',express.static('style'))
+
 app.use(session({
     secret:'myApp',
     resave:false,
@@ -102,9 +99,10 @@ app.get('/Login',notLoggedIn,(req,res)=>{
 
 app.get('/Dashboard',loggedIn,(req,res)=>{
 
-    res.render('Dashboard');
+    res.render('Dashboard',{user:req.user});
 
   })
+
 
 
 
@@ -127,6 +125,33 @@ app.post('/Login',notLoggedIn,urlEncoded,routes.Login)
 
 
 
+app.get('/google',passport.authenticate('google',{
+  scope:['profile','email']
+  }))
+  
+  
+  app.get('/google/callback',passport.authenticate('google'),(req,res)=>{
+          res.redirect('/Dashboard');
+          // console.log('Redirected')
+          // console.log(req.user)
+  })
+  
+  
+  
+  app.get('/facebook',passport.authenticate('facebook',{authType:'rerequest', scope: ['email'] },{
+      }))
+      
+      
+  app.get('/facebook/callback',passport.authenticate('facebook'),(req,res)=>{
+      res.redirect('/Dashboard');
+      // console.log('Redirected')
+      // console.log(req.user)
+  
+      })
+  
+
 app.listen(3000,()=>{
+
   console.log('Server Running on port 3000')
+
 })

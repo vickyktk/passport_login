@@ -60,7 +60,7 @@ module.exports.Register=function(req,res){
         }else{
             bcrypt.hash(pass,10,(err,hash)=>{
                 if(err) throw err;
-                var insert=`INSERT INTO user(name,email,country,Password) VALUES
+                var insert=`INSERT INTO user(Name,email,country,Password) VALUES
                 ('${Name}','${Email}','${country}','${hash}')`;
     
                 conn.query(insert,(err,result)=>{
@@ -87,7 +87,3 @@ module.exports.Login=function(req,res,next){
         successFlash:true
     })(req,res,next)
     }
-
-
-
-    

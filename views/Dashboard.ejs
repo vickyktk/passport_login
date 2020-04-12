@@ -2,7 +2,7 @@
     <div>
 
 
-    <p>Welcome <%= user[0].name %></p>
+    <p>Welcome <%= user[0].Name %></p>
     <a href="/products">SEE ALL PRODUCTS</a>
 
    
@@ -20,7 +20,7 @@
         <input type="text" name="Desc" placeholder="Description" class="form-input"><br>
         Price:
         <input type="text" placeholder="Price" name="Price" class="form-input"><br>
-        <input type="hidden" value="<%= user[0].name %>" name="Author">
+        <input type="hidden" value="<%= user[0].Name %>" name="Author">
         <button type="submit" class="btn btn-success"> ADD</button>
     </form>
 </div>

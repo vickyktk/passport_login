@@ -1,10 +1,6 @@
 const express=require('express')
 const app =express.Router()
-const bodyParser=require('body-parser')
 var conn = require('../Model/db')
-const flash=require('express-flash')
-const expressValidator = require('express-validator')
-let urlEncoded = bodyParser.urlencoded({extended:false})
 
 
 
