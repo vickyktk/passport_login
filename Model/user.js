@@ -29,32 +29,16 @@ var schema=mongoose.Schema({
         type:String,
         require:true
     },
-    image:{
+    Image:{
         type:String,
         require:true
+    },
+    Password:{
+        type:String
     }
 })
 
 
-var user=mongoose.model('googleUser',schema)
+var user=mongoose.model('User',schema)
 
-
-// user.find({_id:'5e8ec6bbfd96cf3ac4465e84'},(err,user)=>{
-//     console.log(user)
-// })
-
-
-// user.deleteOne({_id:'5e91a90bc2a51c2e5831bd17'},(err)=>{
-//     if(err) throw err;
-//     user.find((err,user)=>{
-//         console.log(user)
-//     })
-// })
-
-// user.deleteMany((err)=>{
-//     if(err) throw err;
-//     user.find((err,user)=>{
-//         console.log(user)
-//     })
-// })
 module.exports=user;

@@ -1,5 +1,5 @@
     
-<div class="conatiner mt-5" style="color:whitesmoke;">
+<div class="conatiner mt-2" style="color:whitesmoke;">
         <div class="row">
             <div class="col-md-3 ml-auto mr-auto bg-dark ">
                 <%- include ('partials/messages') -%>
@@ -18,13 +18,6 @@
         <label for="Email">Email</label>
         <input type="text" class="form-control" name="Email"
         value="<%= typeof Email != 'undefined' ? Email :'' %>" placeholder="Your Email goes here" required><br>
-        <label for="select">Country</label>
-        <select name="select" class="form-control">
-            <option>Pakistan</option>
-            <option>Australia</option>
-            <option>Africa</option>
-
-        </select><br>
         <label for="form-control">Password</label>
         <input type="password" name="Password" class="form-group" placeholder="Your password goes here" required><br>
         <input type="submit" value="Register" class="form-group btn btn-success" /><br>

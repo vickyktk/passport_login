@@ -6,7 +6,6 @@ const passport = require('passport')
 const expressValidator = require('express-validator')
 const expressLayouts=require('express-ejs-layouts')
 // Passport Config
-require('./config/passport');
 require('./config/passport_social');
 
 

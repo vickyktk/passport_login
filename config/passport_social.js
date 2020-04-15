@@ -1,9 +1,11 @@
 
-var passport = require('passport'),
-GoogleStrategy = require('passport-google-oauth20').Strategy,
-FbStrategy=require('passport-facebook').Strategy,
-User = require('../model/user');
-keys=require('./keys')
+        var passport = require('passport'),
+            GoogleStrategy = require('passport-google-oauth20').Strategy,
+            FbStrategy=require('passport-facebook').Strategy,
+            LocalStrategy = require('passport-local').Strategy,
+            User = require('../model/user'),
+            keys=require('./keys'),
+            bcrypt=require('bcryptjs')
 
 
 
@@ -28,6 +30,7 @@ var Email=profile._json.email
 var googleID=profile.id
 var FBID=''
 var image=profile._json.picture
+var Password='ffvmkfvmke"@-43352dfsffd'
 
 User.find({googleID:googleID},(err,user)=>{
     if(user.length>0){
@@ -36,7 +39,7 @@ User.find({googleID:googleID},(err,user)=>{
 
     }else{
         
-var newUser=new User({Name,Email,googleID,FBID,image})
+var newUser=new User({Name,Email,googleID,FBID,image,Password})
 
 newUser.save((err,user)=>{
     if(err) throw err;
@@ -69,6 +72,7 @@ profileFields: ['id', 'displayName', 'photos', 'email']
     var googleID='';
     var FBID=profile._json.id
     var image=profile.photos[0].value
+    var Password='ffvmkfvmke"@-43352dfsffd'
 
     
 User.find({FBID:FBID},(err,user)=>{
@@ -77,7 +81,7 @@ User.find({FBID:FBID},(err,user)=>{
         cb(null,user[0]);
     }else{
         
-var newUser=new User({Name,Email,googleID,FBID,image})
+var newUser=new User({Name,Email,googleID,FBID,image,Password})
 
 newUser.save((err,user)=>{
     if(err) throw err;
@@ -91,3 +95,34 @@ newUser.save((err,user)=>{
     
 }
 ))
+
+
+
+passport.use(new LocalStrategy({usernameField:'Email'},function(Email,password,done){
+    User.find({Email:Email},(err,user)=>{
+        if(err) throw err;   
+        if(user.length == 0 )
+        {
+            
+            done(null,false,{message:'incorrect Login Information'})
+            
+        }
+        else{
+            bcrypt.compare(password,user[0].Password,(err,resdb)=>{
+                if(err) throw err;
+                if(resdb==true){
+                    
+                    done(null,user[0],{message:'Successfully logged in'})   
+                }
+                else{
+                    
+                    done(null,false,{message:'incorrect Login Information'})
+                    
+              }
+            })
+}
+
+    })
+
+  }))
+  

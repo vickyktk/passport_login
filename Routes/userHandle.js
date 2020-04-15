@@ -1,10 +1,10 @@
 const express = require('express')
-const mysql = require('mysql')
 const bcrypt=require('bcryptjs')
 const flash=require('express-flash')
-var conn = require('../Model/db')
+User = require('../model/user');
 const expressValidator = require('express-validator')
 const passport = require('passport')
+
 
 
 
@@ -13,23 +13,7 @@ const passport = require('passport')
 module.exports.Register=function(req,res){
     var Name=req.body.Name;
     var Email=req.body.Email;
-    var country=req.body.select;
     var pass=req.body.Password;
-    
-    // //Validating the inputs
-    //  var costumErrors=[];
-    // if(!Name || !Email || !Email){
-    //     costumErrors.push({msg:'Fill out all the fields'})
-
-    // }
-    // if(Name.length < 5){
-    //     costumErrors.push({msg:'Name should be at least five characters'})
-
-    // }
-    // if(pass.length < 6){
-    //     costumErrors.push({msg:'password must be at least six characters'})
-
-    // }
 
     req.checkBody('Name','Name should be between 5 to 15 charachters').notEmpty().escape().isLength({min:5,max:15});
     req.checkBody('Email','Email is required').notEmpty();
@@ -44,34 +28,37 @@ module.exports.Register=function(req,res){
         Name,Email})
     }
     else{
-        
-    var select=`SELECT * FROM user WHERE email='${Email}'`;
-    conn.query(select,(err,result)=>{
-        if(err) throw err;
-        if(result.length > 0){
-            var costumErrors=[]
-            costumErrors.push({msg:'Email already exist'})
-            res.render('Register',{
-                costumErrors,
-                Name,
-                Email
-            })
-            
-        }else{
-            bcrypt.hash(pass,10,(err,hash)=>{
-                if(err) throw err;
-                var insert=`INSERT INTO user(Name,email,country,Password) VALUES
-                ('${Name}','${Email}','${country}','${hash}')`;
-    
-                conn.query(insert,(err,result)=>{
-                    if(err) throw err;
-                    req.flash('success_msg','You are successfully registered ,now Login')
-                    res.redirect('/Login')
-                })
-                        })
 
-        }
-    })
+        User.find({Email:Email},(err,user)=>{
+            if(user.length>0){
+                 costumErrors.push({msg:'Email already exist'})
+                 res.redirect('/Register')
+
+            }else{
+                var data={
+                    Name:Name,
+                    Email:Email,
+                    googleID:'',
+                    FBID:'',
+                    Image:'',
+                    Password:pass
+                }
+                bcrypt.hash(data.Password,10,(err,hash)=>{
+                    if(err) throw err;
+                    data.Password=hash;
+
+                    var newUser=new User(data)
+                    newUser.save((err,user)=>{
+                        if(err) throw err;
+                        req.flash('success_msg','You are successfully registered ,now Login')
+                        res.redirect('/Login')
+                    })
+                })
+
+
+            }
+        })
+        
     }
 
     
